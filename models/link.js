@@ -4,7 +4,7 @@ const shortid = require('shortid')
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,
-    default: shortid.generate
+    default: shortid.generate,
   },
   createdAt: {
     type: Date,
