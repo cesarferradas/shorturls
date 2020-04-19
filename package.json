@@ -1,0 +1,11 @@
+{
+  "name": "urlshort",
+  "version": "1.0.0",
+  "description": "A URL shortener backend and API",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Cesar Ferradas",
+  "license": "MIT"
+}
