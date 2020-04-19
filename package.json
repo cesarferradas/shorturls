@@ -1,12 +1,11 @@
 {
   "name": "shorturls",
   "version": "1.0.0",
-  "description": "A URL shortener backend and API",
+  "description": "A URL shortener REST API",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js",
-    "test": "test",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "nodemon ./app.js"
   },
   "author": "Cesar Ferradas",
   "license": "MIT",

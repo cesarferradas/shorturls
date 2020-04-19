@@ -36,3 +36,5 @@ app.use('/', base)
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
 })
+
+module.exports = app

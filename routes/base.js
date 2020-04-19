@@ -1,6 +1,6 @@
 const express = require('express')
 
-const links = require('../controllers/links')
+const link = require('../controllers/link')
 
 const base = express.Router()
 
@@ -10,6 +10,6 @@ base.route('/')
   })
 
 base.route('/:linkId')
-  .get(links.redirect)
+  .get(link.redirect)
 
 module.exports = base
