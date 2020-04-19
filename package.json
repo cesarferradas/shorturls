@@ -4,8 +4,32 @@
   "description": "A URL shortener backend and API",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "start": "nodemon ./server.js",
+    "test": "test",
+    "lint": "eslint --fix ."
   },
   "author": "Cesar Ferradas",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "mongoose": "^5.9.9",
+    "morgan": "^1.10.0",
+    "shortid": "^2.2.15",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  }
 }
