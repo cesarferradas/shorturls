@@ -1,17 +1,16 @@
 {
   "name": "shorturls",
   "version": "1.0.0",
-  "description": "A lightweight URL shortener REST API",
-  "main": "server.js",
+  "description": "A URL shortener backend and API",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "nodemon ./app.js",
     "test": "test",
-    "lint": "eslint --fix ."
+    "lint": "eslint ."
   },
   "author": "Cesar Ferradas",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",

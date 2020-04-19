@@ -12,7 +12,11 @@ const LinkSchema = new mongoose.Schema({
   },
   url: {
     type: String,
-    required: 'Field url is required',
+    required: 'url is required',
+    validate: {
+      validator: (val) => /^(http|https):\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
+      message: (props) => `${props.value} is not a valid URL`,
+    },
   },
 })
 
