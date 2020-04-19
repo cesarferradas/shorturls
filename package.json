@@ -1,7 +1,7 @@
 {
-  "name": "urlshort",
+  "name": "shorturls",
   "version": "1.0.0",
-  "description": "A URL shortener backend and API",
+  "description": "A lightweight URL shortener REST API",
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js",

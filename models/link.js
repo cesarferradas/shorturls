@@ -14,10 +14,6 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     required: 'Field url is required',
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
 })
 
 const Link = mongoose.model('Link', LinkSchema)
