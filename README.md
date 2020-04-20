@@ -23,24 +23,9 @@ A URL shortening REST API.
 
 ### Manually
 
-1. Install MongoDB
+1. Install [Node.js](https://nodejs.org/en/)
 
-    via Homebrew
-    ```shell
-    brew tap mongodb/brew
-    brew install mongodb-community@4.2
-    ```
-
-    or from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)
-
-1. Install Node.js
-
-    via Homebrew
-    ```shell
-    brew install node
-    ```
-
-    or from [nodejs.org](https://nodejs.org/en/)
+1. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 1. Install dependencies
 
@@ -51,7 +36,7 @@ A URL shortening REST API.
 1. Start MongoDB in the background
 
     ```shell
-    brew services start mongodb-community@4.2
+    mongod --config /usr/local/etc/mongod.conf --fork
     ```
 
 1. Create admin account for authentication
