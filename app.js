@@ -15,6 +15,7 @@ const dbHost = process.env.DB_HOSTNAME
 
 mongoose.connect(`mongodb://${dbHost}/shorturls`, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 }).catch((err) => logger.error(err))
 
 app.use(bodyParser.json())

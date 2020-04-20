@@ -2,9 +2,18 @@
 
 A URL shortening REST API.
 
-## Setup
+## Install
 
-1. Install Docker
+### With Docker
+
+1. Install [Docker](https://docs.docker.com/compose/install/)
+
+1. Create an `.env` file in the project root, and edit the environment variables
+
+    ```
+    cp .example.env .env
+    vim .env
+    ```
 
 1. Run app:
 
@@ -12,9 +21,7 @@ A URL shortening REST API.
     docker-compose up --build
     ```
 
-### Docker
-
-### Manual
+### Manually
 
 1. Install MongoDB
 
@@ -24,7 +31,7 @@ A URL shortening REST API.
     brew install mongodb-community@4.2
     ```
 
-    or follow the [instructions for your OS](https://docs.mongodb.com/manual/administration/install-community/)
+    or from [mongodb.com](https://docs.mongodb.com/manual/administration/install-community/)
 
 1. Install Node.js
 
@@ -41,10 +48,23 @@ A URL shortening REST API.
     npm install
     ```
 
-1. Run MongoDB in the background
+1. Start MongoDB in the background
 
     ```
     brew services start mongodb-community@4.2
+    ```
+
+1. Create an `.env` file in the project root, and edit the environment variables
+
+    ```
+    cp .example.env .env
+    vim .env
+    ```
+
+1. Export environment variables
+
+    ```
+    export $(cat .env | xargs)
     ```
 
 1. Start the server
@@ -53,9 +73,25 @@ A URL shortening REST API.
     npm start
     ```
 
+## Linting
+
+We use [ESLint](https://www.npmjs.com/package/eslint) with the Airbnb Style
+Guide. ESLint is configured to run automatically as a pre-commit hook.
+
+You can also run linting manually with:
+
+```
+npm run lint
+```
+
+## Testing
+
+...coming soon
+
+## Deployment
+
+This app is dockerized, so you can easily deploy it to a server of your choice.
+
 ## Todo
 
-- [ ] Database seeder
-- [ ] Unit tests
-- [ ] Dockerize
-- [ ] Add Users and authentication
+See Issues for outstanding work, and feel free to submit your own.
