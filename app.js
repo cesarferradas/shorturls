@@ -11,9 +11,12 @@ const logger = require('./utils/logger')
 const app = express()
 
 const port = process.env.PORT
-const dbHost = process.env.DB_HOSTNAME
 
-mongoose.connect(`mongodb://${dbHost}/shorturls`, {
+mongoose.connect(`mongodb://${process.env.DB_HOST}/shorturls`, {
+  user: process.env.MONGO_INITDB_ROOT_USERNAME,
+  pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
+  authSource: 'admin',
+  socketTimeoutMS: 10000,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).catch((err) => logger.error(err))
