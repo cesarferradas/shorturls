@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "lint": "eslint .",
-    "start": "if [$NODE_ENV == 'production']; then node app.js; else nodemon app.js; fi"
+    "start": "if [ $NODE_ENV = \"production\" ]; then node app.js; else nodemon app.js; fi"
   },
   "author": "Cesar Ferradas",
   "license": "MIT",
