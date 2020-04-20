@@ -2,7 +2,7 @@
 
 A URL shortening REST API.
 
-## Install
+## Install
 
 ### With Docker
 
@@ -92,6 +92,6 @@ npm run lint
 
 This app is dockerized, so you can easily deploy it to a server of your choice.
 
-## Todo
+## Development
 
-See Issues for outstanding work, and feel free to submit your own.
+See [Issues](https://github.com/cesarferradas/shorturls/issues) for outstanding work, and feel free to submit your own.
