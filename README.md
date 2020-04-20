@@ -25,13 +25,13 @@ A URL shortening REST API.
 
 1. Install [Node.js](https://nodejs.org/en/)
 
-1. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
-
 1. Install dependencies
 
     ```shell
     npm install
     ```
+
+1. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
 
 1. Start MongoDB in the background
 
