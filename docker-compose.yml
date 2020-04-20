@@ -1,0 +1,12 @@
+version: '3.6'
+services:
+  web:
+    env_file:
+      - .env
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/shorturls
+  mongo:
+    image: "mongo:4.2-bionic"

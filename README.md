@@ -2,7 +2,19 @@
 
 A URL shortening REST API.
 
-### Install
+## Setup
+
+1. Install Docker
+
+1. Run app:
+
+    ```
+    docker-compose up --build
+    ```
+
+### Docker
+
+### Manual
 
 1. Install MongoDB
 
@@ -29,8 +41,6 @@ A URL shortening REST API.
     npm install
     ```
 
-### Run
-
 1. Run MongoDB in the background
 
     ```
@@ -43,7 +53,7 @@ A URL shortening REST API.
     npm start
     ```
 
-### TODO
+## Todo
 
 - [ ] Database seeder
 - [ ] Unit tests
