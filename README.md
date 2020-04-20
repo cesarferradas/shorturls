@@ -1,13 +1,26 @@
 # shorturls
 
-## Install
+A URL shortening REST API.
+
+### Install
+
+1. Install MongoDB
+
+    via Homebrew
+    ```
+    brew tap mongodb/brew
+    brew install mongodb-community@4.2
+    ```
+
+    or follow the [instructions for your OS](https://docs.mongodb.com/manual/administration/install-community/)
 
 1. Install Node.js
 
-    via Homebrew:
+    via Homebrew
     ```
     brew install node
     ```
+
     or from [nodejs.org](https://nodejs.org/en/)
 
 1. Install dependencies
@@ -16,10 +29,23 @@
     npm install
     ```
 
-## Run
+### Run
+
+1. Run MongoDB in the background
+
+    ```
+    brew services start mongodb-community@4.2
+    ```
 
 1. Start the server
 
     ```
     npm start
     ```
+
+### TODO
+
+- [ ] Database seeder
+- [ ] Unit tests
+- [ ] Dockerize
+- [ ] Add Users and authentication
