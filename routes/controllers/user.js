@@ -14,10 +14,9 @@ const register = (req, res) => {
         message: 'Could not register User',
       })
     } else {
-      // user.passwordHash = undefined
       res.json({
         status: 200,
-        data: user,
+        data: { email: user.email },
       })
     }
   })
