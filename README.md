@@ -91,7 +91,11 @@ npm run lint
 
 ## Deployment
 
-This app is dockerized, so you can easily deploy it to a server of your choice.
+You can easily deploy this application to a server of your choice by using Docker.
+
+Please **never use the `.example.env` environment variables in a production
+environment**. The defaults are only for local development and are not secure.
+Change the passwords and secrets to long, random strings.
 
 ## Development
 
