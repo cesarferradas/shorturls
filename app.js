@@ -58,12 +58,17 @@ app.use((err, req, res, done) => {
   const status = err.status || 500
   const message = err.message || 'Server error'
 
-  logger.error(`${message}`)
+  if (status >= 500) {
+    logger.error(`${message}`)
+  } else {
+    logger.info(`${message}`)
+  }
 
   res.status(status).json({
     status,
     message,
   })
+
   done()
 })
 
