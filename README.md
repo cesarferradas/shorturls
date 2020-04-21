@@ -25,7 +25,15 @@ A URL shortening REST API.
 
 ### Manually
 
-1. Install [Node.js](https://nodejs.org/en/)
+1. Install [Node](https://nodejs.org/en/)
+
+1. Install [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+1. Use this project's Node version
+
+    ```shell
+    nvm use
+    ```
 
 1. Install dependencies
 
