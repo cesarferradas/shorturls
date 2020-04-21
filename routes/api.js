@@ -1,6 +1,7 @@
 const express = require('express')
 
-const link = require('../controllers/link')
+const link = require('./controllers/link')
+const user = require('./controllers/user')
 
 const api = express.Router()
 
@@ -13,7 +14,7 @@ api.route('/')
   })
 
 api.route('/links')
-  .post(link.create)
+  .post(user.loginRequired, link.create)
 
 api.route('*')
   .all((req, res) => {
