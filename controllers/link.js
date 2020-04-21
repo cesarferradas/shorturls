@@ -38,7 +38,7 @@ const retrieve = (req, res, next) => {
 
 const redirect = (req, res) => {
   Link.findById(req.params.linkId, (err, link) => {
-    // TODO redirect to somewhere more meaningful on error
+    // TODO redirect to somewhere more meaningful
     if (err || !link) {
       res.status(404).send('Not found')
     } else {

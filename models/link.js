@@ -20,7 +20,7 @@ const Link = mongoose.model('Link', LinkSchema)
 
 const toJson = (link) => ({
   id: link.id,
-  email: link.url,
+  url: link.url,
   created_at: link.createdAt,
   updated_at: link.updatedAt,
 })
