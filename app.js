@@ -20,12 +20,13 @@ const logger = winston.createLogger({
 })
 
 mongoose.connect(`mongodb://${process.env.DB_HOST}/shorturls`, {
+  authSource: 'admin',
   user: process.env.MONGO_INITDB_ROOT_USERNAME,
   pass: process.env.MONGO_INITDB_ROOT_PASSWORD,
-  authSource: 'admin',
-  socketTimeoutMS: 10000,
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  socketTimeoutMS: 10000,
 }).catch((err) => logger.error(`Could not connect to MongoDB ${err}`))
 
 app.use(bodyParser.json())

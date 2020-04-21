@@ -1,5 +1,7 @@
 # shorturls
 
+[![Build Status](https://travis-ci.org/cesarferradas/shorturls.svg?branch=master)](https://travis-ci.org/cesarferradas/shorturls)
+
 A URL shortening REST API.
 
 ## Install
