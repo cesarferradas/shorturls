@@ -1,6 +1,6 @@
 const express = require('express')
 
-const link = require('./controllers/link')
+const link = require('../controllers/link')
 
 const base = express.Router()
 

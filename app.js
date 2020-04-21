@@ -57,21 +57,19 @@ app.use('/', base)
 app.use((err, req, res, done) => {
   const status = err.status || 500
   const message = err.message || 'Server error'
+  const error = err.error || ''
 
   if (status >= 500) {
-    logger.error(`${message}`)
+    logger.error(`${message}: ${error}`)
   } else {
-    logger.info(`${message}`)
+    logger.info(`${message}: ${error}`)
   }
 
-  res.status(status).json({
-    status,
-    message,
-  })
+  res.status(status).json({ status, message })
 
   done()
 })
 
 app.listen(port, () => {
-  logger.info(`server running on port ${port}`)
+  logger.info(`Server running on port ${port}`)
 })
