@@ -5,9 +5,7 @@ const link = require('./controllers/link')
 const base = express.Router()
 
 base.route('/')
-  .get((req, res) => {
-    res.send('Oops, there\'s nothing here')
-  })
+  .get((req, res) => { res.send('Oops, there\'s nothing here') })
 
 base.route('/:linkId')
   .get(link.redirect)

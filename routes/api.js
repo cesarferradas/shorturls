@@ -17,8 +17,8 @@ api.route('/links')
   .post(user.loginRequired, link.create)
 
 api.route('*')
-  .all((req, res) => {
-    res.status(400).json({
+  .all((req, res, next) => {
+    next({
       status: 400,
       message: `Cannot ${req.method} to ${req.url}`,
     })

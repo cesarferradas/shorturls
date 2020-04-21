@@ -1,11 +1,11 @@
 const Link = require('../../models/link')
 
-const create = (req, res) => {
+const create = (req, res, next) => {
   // TODO handle shortid collisions
   const newLink = new Link(req.body)
   newLink.save((err, link) => {
     if (err) {
-      res.status(400).json({
+      next({
         status: 400,
         message: err.message,
       })

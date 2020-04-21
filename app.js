@@ -26,7 +26,7 @@ mongoose.connect(`mongodb://${process.env.DB_HOST}/shorturls`, {
   socketTimeoutMS: 10000,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).catch(() => logger.error('Could not connect to MongoDB'))
+}).catch((err) => logger.error(`Could not connect to MongoDB ${err}`))
 
 app.use(bodyParser.json())
 app.use(helmet())
@@ -52,6 +52,19 @@ app.use((req, res, next) => {
 app.use('/api/auth/', auth)
 app.use('/api/', api)
 app.use('/', base)
+
+app.use((err, req, res, done) => {
+  const status = err.status || 500
+  const message = err.message || 'Server error'
+
+  logger.error(`${message}`)
+
+  res.status(status).json({
+    status,
+    message,
+  })
+  done()
+})
 
 app.listen(port, () => {
   logger.info(`server running on port ${port}`)
