@@ -1,4 +1,4 @@
-const Link = require('../../models/link')
+const { Link, toJson } = require('../models/link')
 
 const create = (req, res, next) => {
   // TODO handle shortid collisions
@@ -7,12 +7,30 @@ const create = (req, res, next) => {
     if (err) {
       next({
         status: 400,
-        message: err.message,
+        message: 'Could not create Link',
+        error: err,
       })
     } else {
       res.json({
         status: 200,
-        data: link,
+        data: toJson(link),
+      })
+    }
+  })
+}
+
+const retrieve = (req, res, next) => {
+  Link.findById(req.params.linkId, (err, link) => {
+    if (err || !link) {
+      next({
+        status: 400,
+        message: 'Not found',
+        error: err,
+      })
+    } else {
+      res.json({
+        status: 200,
+        data: toJson(link),
       })
     }
   })
@@ -31,5 +49,6 @@ const redirect = (req, res) => {
 
 module.exports = {
   create,
+  retrieve,
   redirect,
 }

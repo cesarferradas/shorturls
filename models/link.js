@@ -6,20 +6,26 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     default: shortid.generate,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
   url: {
     type: String,
-    required: 'url is required',
+    required: true,
     validate: {
       validator: (val) => /^https?:\/\/(www)?[^ "]+\.+[^ "]+$/.test(val),
       message: (props) => `${props.value} is not a valid URL`,
     },
   },
-})
+}, { timestamps: true })
 
 const Link = mongoose.model('Link', LinkSchema)
 
-module.exports = Link
+const toJson = (link) => ({
+  id: link.id,
+  email: link.url,
+  created_at: link.createdAt,
+  updated_at: link.updatedAt,
+})
+
+module.exports = {
+  Link,
+  toJson,
+}
