@@ -10,7 +10,7 @@ A URL shortening REST API.
 
 1. Install [Docker](https://docs.docker.com/compose/install/)
 
-1. Create an `.env` file in the project root, and edit the environment variables
+1. Create an `.env` file in the project root, and set your environment variables
 
     ```shell
     cp .example.env .env
@@ -65,7 +65,7 @@ A URL shortening REST API.
       })
     ```
 
-1. Create an `.env` file in the project root, and edit the environment variables
+1. Create an `.env` file in the project root, and set your environment variables
 
     ```shell
     cp .example.env .env
@@ -102,10 +102,6 @@ npm run lint
 ## Deployment
 
 You can easily deploy this application to a server of your choice by using Docker.
-
-Please **never use the `.example.env` environment variables in a production
-environment**. The defaults are only for local development and are not secure.
-Change the passwords and secrets to long, random strings.
 
 ## Development
 

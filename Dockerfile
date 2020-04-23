@@ -1,6 +1,6 @@
 FROM node:12
 
-WORKDIR /shorturls
+WORKDIR /src
 
 COPY package*.json ./
 RUN npm install

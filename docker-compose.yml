@@ -5,12 +5,12 @@ services:
       - .env
     build: .
     ports:
-      - "4000:4000"
+      - "3000:3000"
     volumes:
-      - .:/shorturls
+      - .:/src
       # prevent mapping host node_modules to the container
       # see: https://stackoverflow.com/a/41035371
-      - /shorturls/node_modules
+      - /src/node_modules
   mongo:
     env_file:
       - .env

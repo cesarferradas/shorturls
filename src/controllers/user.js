@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+const config = require('../config')
 const { User, toJson } = require('../models/user')
 
 const register = (req, res, next) => {
@@ -35,7 +36,7 @@ const login = (req, res, next) => {
       res.json({
         status: 200,
         data: {
-          token: jwt.sign({ _id: user.id }, process.env.JWT_SECRET),
+          token: jwt.sign({ _id: user.id }, config.jwt.secret),
         },
       })
     }
