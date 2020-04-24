@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const config = require('../config')
-const { User, toJson } = require('../models/user')
+const User = require('../models/user')
 
 const register = (req, res, next) => {
   const newUser = new User(req.body)
@@ -18,7 +18,7 @@ const register = (req, res, next) => {
     } else {
       res.json({
         status: 200,
-        data: toJson(user),
+        data: user.toJson(),
       })
     }
   })

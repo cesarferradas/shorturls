@@ -1,4 +1,4 @@
-const { Link, toJson } = require('../models/link')
+const Link = require('../models/link')
 
 const create = (req, res, next) => {
   // TODO handle shortid collisions
@@ -13,7 +13,7 @@ const create = (req, res, next) => {
     } else {
       res.json({
         status: 200,
-        data: toJson(link),
+        data: link.toJson(),
       })
     }
   })
@@ -30,7 +30,7 @@ const retrieve = (req, res, next) => {
     } else {
       res.json({
         status: 200,
-        data: toJson(link),
+        data: link.toJson(),
       })
     }
   })

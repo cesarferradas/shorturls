@@ -16,16 +16,13 @@ const UserSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-const User = mongoose.model('User', UserSchema)
-
-const toJson = (user) => ({
-  id: user.id,
-  email: user.email,
-  created_at: user.createdAt,
-  updated_at: user.updatedAt,
+UserSchema.methods.toJson = () => ({
+  id: this.user.id,
+  email: this.user.email,
+  created_at: this.user.createdAt,
+  updated_at: this.user.updatedAt,
 })
 
-module.exports = {
-  User,
-  toJson,
-}
+const User = mongoose.model('User', UserSchema)
+
+module.exports = User
