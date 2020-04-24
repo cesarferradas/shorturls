@@ -1,13 +1,54 @@
+const bcrypt = require('bcrypt')
 const express = require('express')
+const jwt = require('jsonwebtoken')
 
-const user = require('../controllers/user')
+const config = require('../config')
+const User = require('../models/user')
 
 const auth = express.Router()
 
+// TODO rate limit using middleware and redis here
+// auth.use(middleware.rateLimit)
+
 auth.route('/register')
-  .post(user.register)
+  .post((req, res, next) => {
+    const newUser = new User(req.body)
+    newUser.password_hash = bcrypt.hashSync(req.body.password, config.saltRounds)
+
+    newUser.save((err, user) => {
+      if (err) {
+        next({
+          status: 400,
+          message: 'Could not register User',
+          error: err,
+        })
+      } else {
+        res.json({
+          status: 200,
+          data: user.toJson(),
+        })
+      }
+    })
+  })
 
 auth.route('/login')
-  .post(user.login)
+  .post((req, res, next) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (err || !user || !bcrypt.compareSync(req.body.password, user.password_hash)) {
+        next({
+          status: 401,
+          message: 'No email and password combination found',
+          error: err,
+        })
+      } else {
+        res.json({
+          status: 200,
+          data: {
+            token: jwt.sign({ _id: user.id }, config.jwt.secret),
+          },
+        })
+      }
+    })
+  })
 
 module.exports = auth

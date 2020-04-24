@@ -1,7 +1,7 @@
 const express = require('express')
 
-const link = require('../controllers/link')
-const user = require('../controllers/user')
+const Link = require('../models/link')
+const middleware = require('./middleware')
 
 const api = express.Router()
 
@@ -14,10 +14,42 @@ api.route('/')
   })
 
 api.route('/links')
-  .post(user.loginRequired, link.create)
+  .post(middleware.requireAuth, (req, res, next) => {
+    // TODO handle shortid collisions
+    const newLink = new Link(req.body)
+    newLink.save((err, link) => {
+      if (err) {
+        next({
+          status: 400,
+          message: 'Could not create Link',
+          error: err,
+        })
+      } else {
+        res.json({
+          status: 200,
+          data: link.toJson(),
+        })
+      }
+    })
+  })
 
 api.route('/links/:linkId')
-  .get(user.loginRequired, link.retrieve)
+  .get(middleware.requireAuth, (req, res, next) => {
+    Link.findById(req.params.linkId, (err, link) => {
+      if (err || !link) {
+        next({
+          status: 400,
+          message: 'Not found',
+          error: err,
+        })
+      } else {
+        res.json({
+          status: 200,
+          data: link.toJson(),
+        })
+      }
+    })
+  })
 
 api.route('*')
   .all((req, res, next) => {

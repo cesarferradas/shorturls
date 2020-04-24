@@ -23,6 +23,8 @@ config.jwt = {
 
 config.port = process.env.PORT || 3000
 
+config.saltRounds = 10
+
 if (config.env === 'production') {
   config.morgan.format = 'combined'
   config.winston.level = 'info'
