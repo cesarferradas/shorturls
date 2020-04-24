@@ -16,12 +16,14 @@ const LinkSchema = new mongoose.Schema({
   },
 }, { timestamps: true })
 
-LinkSchema.methods.toJson = () => ({
-  id: this.link.id,
-  url: this.link.url,
-  created_at: this.link.createdAt,
-  updated_at: this.link.updatedAt,
-})
+LinkSchema.options.toJSON = {
+  transform: (doc, ret) => ({
+    code: ret._id,
+    url: ret.url,
+    created_at: ret.createdAt,
+    updated_at: ret.updatedAt,
+  }),
+}
 
 const Link = mongoose.model('Link', LinkSchema)
 

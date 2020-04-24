@@ -12,16 +12,16 @@ const UserSchema = new mongoose.Schema({
   },
   passwordHash: {
     type: String,
-    select: false,
   },
 }, { timestamps: true })
 
-UserSchema.methods.toJson = () => ({
-  id: this.user.id,
-  email: this.user.email,
-  created_at: this.user.createdAt,
-  updated_at: this.user.updatedAt,
-})
+UserSchema.options.toJSON = {
+  transform: (doc, ret) => ({
+    email: ret.email,
+    created_at: ret.createdAt,
+    updated_at: ret.updatedAt,
+  }),
+}
 
 const User = mongoose.model('User', UserSchema)
 

@@ -4,7 +4,7 @@ config.env = process.env.NODE_ENV
 
 config.db = {
   host: process.env.DB_HOST || 'localhost',
-  name: process.env.DB_NAME,
+  name: process.env.DB_NAME || 'shorturls',
   user: process.env.MONGO_INITDB_ROOT_USERNAME,
   password: process.env.MONGO_INITDB_ROOT_PASSWORD,
 }

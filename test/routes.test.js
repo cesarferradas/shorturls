@@ -3,55 +3,119 @@ const mongoose = require('mongoose')
 
 const config = require('./config')
 const server = require('../src/server')
+const Link = require('../src/models/link')
+const User = require('../src/models/user')
 
 before((done) => {
   mongoose.connect(`mongodb://${config.db.host}/${config.db.name}`, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }, done)
+  }, () => {
+    Link.deleteMany({}, () => {
+      User.deleteMany({}, done)
+    })
+  })
+  // TODO delete and recreate, seed DB with test Link and User
+  // TODO disable redis rate limiting
 })
 
-describe('Base route', () => {
-  it('GET / returns 200', (done) => {
+describe('Base root', () => {
+  it('returns success', (done) => {
     request(server)
       .get('/')
       .expect(200, done)
   })
-  it('GET /foobar returns 404', (done) => {
+})
+
+describe('Base redirect', () => {
+  xit('returns a redirect to a long url', (done) => {
+    // TODO mock database call to find this Link
+    request(server)
+      .get('dY-Z2vk4X')
+      .expect(404, done)
+  })
+  it('returns a 404 if link not found', (done) => {
     request(server)
       .get('/foobar')
       .expect(404, done)
   })
 })
 
-describe('API route', () => {
-  it('GET / returns 200', (done) => {
+describe('/api', () => {
+  it('returns success', (done) => {
     request(server)
       .get('/api')
       .expect(200, done)
   })
-  it('GET /links/foo returns 401', (done) => {
-    request(server)
-      .get('/api/links/foo')
-      .expect(401, done)
-  })
-  it('POST /links returns 401', (done) => {
+})
+
+describe('/api/links', () => {
+  it('requires authentication', (done) => {
     request(server)
       .post('/api/links')
       .expect(401, done)
   })
-  it('GET /bar returns 400', (done) => {
+  xit('creates a link', (done) => {
+    // TODO send valid JWT to prevent 401
     request(server)
-      .get('/api/bar')
+      .post('/api/links')
+      .expect(201, done)
+  })
+})
+
+describe('/api/links/:linkId', () => {
+  it('requires authentication', (done) => {
+    request(server)
+      .get('/api/links/dY-Z2vk4X')
+      .expect(401, done)
+  })
+  xit('gets a link', (done) => {
+    // TODO send valid JWT to prevent 401
+    request(server)
+      .get('/api/links/dY-Z2vk4X')
+      .expect(200, done)
+  })
+})
+
+describe('api/auth/register', () => {
+  it('creates a user', (done) => {
+    request(server)
+      .post('/api/auth/register')
+      .send({
+        email: 'user1@shorturls.com',
+        password: 'password',
+      })
+      .expect(201, done)
+  })
+  xit('fails if user already exists', (done) => {
+    request(server)
+      .post('/api/auth/register')
+      .send({
+        email: 'user@shorturls.com',
+        password: 'password',
+      })
       .expect(400, done)
   })
 })
 
-describe('API auth route', () => {
-  it('GET /auth/foo returns 400', (done) => {
+describe('api/auth/login', () => {
+  xit('returns a JWT', (done) => {
     request(server)
-      .get('/api/auth/foo')
-      .expect(400, done)
+      .post('/api/auth/login')
+      .send({
+        email: 'user@shorturls.com',
+        password: 'password',
+      })
+      .expect(201, done)
+  })
+  xit('returns unauthorized if credentials are incorrect', (done) => {
+    request(server)
+      .post('/api/auth/login')
+      .send({
+        email: 'user@shorturls.com',
+        password: 'wrongpassword',
+      })
+      .expect(401, done)
   })
 })

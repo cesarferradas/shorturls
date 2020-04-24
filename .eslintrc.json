@@ -16,12 +16,14 @@
         "expect": true,
         "it": true,
         "jest": true,
-        "test": true
+        "test": true,
+        "xit": true
     },
     "parserOptions": {
         "ecmaVersion": 2018
     },
     "rules": {
+        "no-underscore-dangle": ["error", {"allow": ["_id"]}],
         "semi": ["error", "never"]
     }
 }

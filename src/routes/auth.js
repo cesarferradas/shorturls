@@ -7,13 +7,10 @@ const User = require('../models/user')
 
 const auth = express.Router()
 
-// TODO rate limit using middleware and redis here
-// auth.use(middleware.rateLimit)
-
 auth.route('/register')
   .post((req, res, next) => {
     const newUser = new User(req.body)
-    newUser.password_hash = bcrypt.hashSync(req.body.password, config.saltRounds)
+    newUser.passwordHash = bcrypt.hashSync(req.body.password, config.saltRounds)
 
     newUser.save((err, user) => {
       if (err) {
@@ -23,9 +20,9 @@ auth.route('/register')
           error: err,
         })
       } else {
-        res.json({
-          status: 200,
-          data: user.toJson(),
+        res.status(201).json({
+          status: 201,
+          data: user,
         })
       }
     })
@@ -34,7 +31,7 @@ auth.route('/register')
 auth.route('/login')
   .post((req, res, next) => {
     User.findOne({ email: req.body.email }, (err, user) => {
-      if (err || !user || !bcrypt.compareSync(req.body.password, user.password_hash)) {
+      if (err || !user || !bcrypt.compareSync(req.body.password, user.passwordHash)) {
         next({
           status: 401,
           message: 'No email and password combination found',
@@ -44,7 +41,7 @@ auth.route('/login')
         res.json({
           status: 200,
           data: {
-            token: jwt.sign({ _id: user.id }, config.jwt.secret),
+            token: jwt.sign({ eml: user.email }, config.jwt.secret),
           },
         })
       }

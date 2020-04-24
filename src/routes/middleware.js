@@ -3,17 +3,6 @@ const jwt = require('jsonwebtoken')
 const config = require('../config')
 const logger = require('../utils/logger')
 
-const requireAuth = (req, res, next) => {
-  if (req.user) {
-    next()
-  } else {
-    next({
-      status: 401,
-      message: 'Unauthorized',
-    })
-  }
-}
-
 const loadUser = (req, res, next) => {
   req.user = undefined
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -27,6 +16,17 @@ const loadUser = (req, res, next) => {
     })
   } else {
     next()
+  }
+}
+
+const requireAuth = (req, res, next) => {
+  if (req.user) {
+    next()
+  } else {
+    next({
+      status: 401,
+      message: 'Unauthorized',
+    })
   }
 }
 
