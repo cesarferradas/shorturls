@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "NODE_ENV=test mocha --recursive \"test/**/*.js\" --exit",
+    "test": "mocha --recursive --exit",
     "start": "if [ $NODE_ENV = \"production\" ]; then node src/server.js; else nodemon src/server.js; fi"
   },
   "author": "Cesar Ferradas",

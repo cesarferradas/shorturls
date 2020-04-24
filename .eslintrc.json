@@ -9,6 +9,7 @@
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
         "afterEach": true,
+        "before": true,
         "beforeAll": true,
         "beforeEach": true,
         "describe": true,

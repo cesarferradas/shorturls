@@ -1,8 +1,6 @@
-const config = {}
+const config = module.exports
 
 config.env = process.env.NODE_ENV
-
-config.port = process.env.PORT || 3000
 
 config.db = {
   host: process.env.DB_HOST || 'localhost',
@@ -11,7 +9,11 @@ config.db = {
   password: process.env.MONGO_INITDB_ROOT_PASSWORD,
 }
 
-config.logger = {
+config.morgan = {
+  format: 'tiny',
+}
+
+config.winston = {
   level: 'debug',
 }
 
@@ -19,12 +21,9 @@ config.jwt = {
   secret: process.env.JWT_SECRET,
 }
 
-if (config.env === 'test') {
-  // eslint-disable-next-line global-require
-  const testConfig = require('./config.test.js')
-  Object.assign(config, { ...testConfig })
-} else if (config.env === 'production') {
-  config.logger.level = 'info'
-}
+config.port = process.env.PORT || 3000
 
-module.exports = config
+if (config.env === 'production') {
+  config.morgan.format = 'combined'
+  config.winston.level = 'info'
+}
