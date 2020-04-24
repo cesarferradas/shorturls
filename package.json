@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "mocha --recursive --exit",
+    "test": "nyc mocha --recursive --exit",
     "start": "if [ $NODE_ENV = \"production\" ]; then node src/server.js; else nodemon src/server.js; fi"
   },
   "author": "Cesar Ferradas",
@@ -28,6 +28,7 @@
     "husky": "^4.2.5",
     "mocha": "^7.1.1",
     "nodemon": "^2.0.3",
+    "nyc": "^15.0.1",
     "supertest": "^4.0.2"
   },
   "husky": {

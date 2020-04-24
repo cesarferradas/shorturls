@@ -1,6 +1,6 @@
-# shorturls
-
 [![Build Status](https://travis-ci.org/cesarferradas/shorturls.svg?branch=master)](https://travis-ci.org/cesarferradas/shorturls)
+
+# shorturls
 
 A URL shortening REST API.
 
@@ -86,10 +86,10 @@ A URL shortening REST API.
 
 ## Linting
 
-We use [ESLint](https://www.npmjs.com/package/eslint) with the Airbnb Style
-Guide. ESLint is configured to run automatically as a pre-commit hook.
+[ESLint](https://eslint.org/) is configured to run automatically as a
+pre-commit hook. It follows the Airbnb JavaScript Style Guide.
 
-You can also run linting manually with:
+You can run linting manually with:
 
 ```shell
 npm run lint
@@ -97,12 +97,22 @@ npm run lint
 
 ## Testing
 
-...coming soon
+Tests run using [Mocha](https://mochajs.org/) and code coverage is reported
+with [Istanbul](https://istanbul.js.org/).
+
+All tests live under the `test` directory which is Mocha's default path.
+
+You can run the test suite with:
+
+```shell
+npm test
+```
 
 ## Deployment
 
-You can easily deploy this application to a server of your choice by using Docker.
+You can deploy this application to a server of your choice using Docker.
 
 ## Development
 
-See [Issues](https://github.com/cesarferradas/shorturls/issues) for outstanding work, and feel free to submit your own.
+See [Issues](https://github.com/cesarferradas/shorturls/issues) for outstanding
+work, and feel free to submit your own.
