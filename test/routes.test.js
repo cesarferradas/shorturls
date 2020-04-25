@@ -11,12 +11,14 @@ before((done) => {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }, () => {
-    Link.deleteMany({}, () => {
-      User.deleteMany({}, done)
-    })
-  })
+  }, done)
   // TODO seed DB
+})
+
+after((done) => {
+  Link.deleteMany({}, () => {
+    User.deleteMany({}, done)
+  })
 })
 
 describe('Base root', () => {
