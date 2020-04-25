@@ -16,8 +16,7 @@ before((done) => {
       User.deleteMany({}, done)
     })
   })
-  // TODO delete and recreate, seed DB with test Link and User
-  // TODO disable redis rate limiting
+  // TODO seed DB
 })
 
 describe('Base root', () => {
@@ -107,7 +106,7 @@ describe('api/auth/login', () => {
         email: 'user@shorturls.com',
         password: 'password',
       })
-      .expect(201, done)
+      .expect(200, done)
   })
   xit('returns unauthorized if credentials are incorrect', (done) => {
     request(server)
