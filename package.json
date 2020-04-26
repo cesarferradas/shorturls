@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "nyc mocha  --recursive --exit",
-    "start": "if [ $NODE_ENV = \"production\" ]; then node src/server.js; else nodemon src/server.js; fi"
+    "test": "./scripts/test.sh",
+    "start": "./scripts/start.sh"
   },
   "author": "Cesar Ferradas",
   "license": "MIT",
