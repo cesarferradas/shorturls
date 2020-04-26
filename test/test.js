@@ -1,9 +1,10 @@
-const request = require('supertest')
 const mongoose = require('mongoose')
+const request = require('supertest')
 
-const server = require('../src/server')
+const app = require('../src/app')
 const Link = require('../src/models/link')
 const User = require('../src/models/user')
+
 
 before((done) => {
   mongoose.connect('mongodb://localhost/shorturls_test', {
@@ -12,6 +13,7 @@ before((done) => {
     useUnifiedTopology: true,
   }, done)
   // TODO seed DB
+  // TODO mock redis client
 })
 
 after((done) => {
@@ -22,7 +24,7 @@ after((done) => {
 
 describe('Base root', () => {
   it('returns success', (done) => {
-    request(server)
+    request(app)
       .get('/')
       .expect(200, done)
   })
@@ -31,12 +33,12 @@ describe('Base root', () => {
 describe('Base redirect', () => {
   xit('returns a redirect to a long url', (done) => {
     // TODO mock database call to find this Link
-    request(server)
+    request(app)
       .get('dY-Z2vk4X')
       .expect(404, done)
   })
   it('returns a 404 if link not found', (done) => {
-    request(server)
+    request(app)
       .get('/foobar')
       .expect(404, done)
   })
@@ -44,7 +46,7 @@ describe('Base redirect', () => {
 
 describe('/api', () => {
   it('returns success', (done) => {
-    request(server)
+    request(app)
       .get('/api')
       .expect(200, done)
   })
@@ -52,13 +54,13 @@ describe('/api', () => {
 
 describe('/api/links', () => {
   it('requires authentication', (done) => {
-    request(server)
+    request(app)
       .post('/api/links')
       .expect(401, done)
   })
   xit('creates a link', (done) => {
     // TODO send valid JWT to prevent 401
-    request(server)
+    request(app)
       .post('/api/links')
       .expect(201, done)
   })
@@ -66,7 +68,7 @@ describe('/api/links', () => {
 
 describe('api/auth/register', () => {
   it('creates a user', (done) => {
-    request(server)
+    request(app)
       .post('/api/auth/register')
       .send({
         email: 'user1@shorturls.com',
@@ -75,7 +77,7 @@ describe('api/auth/register', () => {
       .expect(201, done)
   })
   xit('fails if user already exists', (done) => {
-    request(server)
+    request(app)
       .post('/api/auth/register')
       .send({
         email: 'user@shorturls.com',
@@ -87,7 +89,7 @@ describe('api/auth/register', () => {
 
 describe('api/auth/login', () => {
   xit('returns a JWT', (done) => {
-    request(server)
+    request(app)
       .post('/api/auth/login')
       .send({
         email: 'user@shorturls.com',
@@ -96,7 +98,7 @@ describe('api/auth/login', () => {
       .expect(200, done)
   })
   xit('returns unauthorized if credentials are incorrect', (done) => {
-    request(server)
+    request(app)
       .post('/api/auth/login')
       .send({
         email: 'user@shorturls.com',

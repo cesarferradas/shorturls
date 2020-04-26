@@ -6,10 +6,12 @@ config.jwt = {
   secret: process.env.JWT_SECRET,
 }
 
+// see https://zelark.github.io/nano-id-cc/
+// before changing the link size
 config.linkSize = 7
 
 config.mongo = {
-  host: process.env.MONGO_HOST,
+  host: process.env.MONGO_HOST || 'localhost',
   name: process.env.MONGO_NAME || 'shorturls',
   user: process.env.MONGO_INITDB_ROOT_USERNAME,
   password: process.env.MONGO_INITDB_ROOT_PASSWORD,
@@ -21,10 +23,10 @@ config.morgan = {
 
 config.port = process.env.PORT || 3000
 
-config.rateLimitTTL = 1
+config.rateLimitTTL = process.env.RATE_LIMIT_TTL || 1
 
 config.redis = {
-  host: process.env.REDIS_HOST,
+  host: process.env.REDIS_HOST || 'localhost',
 }
 
 config.saltRounds = 10
