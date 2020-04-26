@@ -3,3 +3,10 @@ node_js:
   - 12
 services:
   - mongodb
+  - redis
+env:
+  - MONGO_HOST=localhost
+  - NODE_ENV=test
+  - PORT=3001
+  - RATE_LIMIT_TTL=0
+  - REDIS_HOST=localhost
