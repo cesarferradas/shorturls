@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "export $(cat .test.env | xargs) && nyc mocha  --timeout 15000 --recursive --exit",
+    "test": "export $(cat .env.test | xargs) && nyc mocha  --recursive --exit",
     "start": "if [ $NODE_ENV = \"production\" ]; then node src/server.js; else nodemon src/server.js; fi"
   },
   "author": "Cesar Ferradas",
