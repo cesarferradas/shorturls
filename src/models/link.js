@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
-const shortid = require('shortid')
+const { nanoid } = require('nanoid')
+
+const config = require('../config')
 
 const LinkSchema = new mongoose.Schema({
   _id: {
     type: String,
-    default: shortid.generate,
+    default: () => nanoid(config.linkSize),
   },
   url: {
     type: String,

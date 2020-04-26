@@ -1,13 +1,12 @@
 const request = require('supertest')
 const mongoose = require('mongoose')
 
-const config = require('./config')
 const server = require('../src/server')
 const Link = require('../src/models/link')
 const User = require('../src/models/user')
 
 before((done) => {
-  mongoose.connect(`mongodb://${config.db.host}/${config.db.name}`, {
+  mongoose.connect('mongodb://localhost/shorturls_test', {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -62,20 +61,6 @@ describe('/api/links', () => {
     request(server)
       .post('/api/links')
       .expect(201, done)
-  })
-})
-
-describe('/api/links/:linkId', () => {
-  it('requires authentication', (done) => {
-    request(server)
-      .get('/api/links/dY-Z2vk4X')
-      .expect(401, done)
-  })
-  xit('gets a link', (done) => {
-    // TODO send valid JWT to prevent 401
-    request(server)
-      .get('/api/links/dY-Z2vk4X')
-      .expect(200, done)
   })
 })
 

@@ -11,33 +11,33 @@ const config = require('./config')
 const logger = require('./utils/logger')
 const middleware = require('./routes/middleware')
 
-const server = express()
+const app = express()
 
-mongoose.connect(`mongodb://${config.db.host}/${config.db.name}`, {
+mongoose.connect(`mongodb://${config.mongo.host}/${config.mongo.name}`, {
   authSource: 'admin',
-  user: config.db.user,
-  pass: config.db.password,
+  user: config.mongo.user,
+  pass: config.mongo.password,
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   socketTimeoutMS: 5000,
 }).catch((err) => logger.error(`Could not connect to MongoDB ${err}`))
 
-server.use(bodyParser.json())
-server.use(helmet())
-server.use(morgan(config.morgan.format))
+app.use(bodyParser.json())
+app.use(helmet())
+app.use(morgan(config.morgan.format))
 
-server.use(middleware.loadUser)
-// TODO rate limit using middleware and redis here
-// base.use(middleware.rateLimit)
+app.use(middleware.rateLimit)
+app.use(middleware.loadUser)
 
-server.use('/api/auth/', auth)
-server.use('/api/', api)
-server.use('/', base)
+app.use('/api/auth/', auth)
+app.use('/api/', api)
+app.use('/', base)
 
-server.use(middleware.handleError)
+// TODO format unhandled errors
+app.use(middleware.handleError)
 
-server.listen(config.port, () => {
+const server = app.listen(config.port, () => {
   logger.info(`Server running on port ${config.port}`)
 })
 
