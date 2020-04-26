@@ -10,14 +10,13 @@ A URL shortening REST API.
 
 1. Install [Docker](https://docs.docker.com/compose/install/)
 
-1. Create an `.env` file in the project root, and set your environment variables
+1. Create a `.env` file in the project root, and set your environment variables
 
     ```shell
     cp .example.env .env
-    vim .env
     ```
 
-1. Run app:
+1. Run app
 
     ```shell
     docker-compose up --build
@@ -65,17 +64,10 @@ A URL shortening REST API.
       })
     ```
 
-1. Create an `.env` file in the project root, and set your environment variables
+1. Create a `.env` file in the project root, and set your environment variables
 
     ```shell
     cp .example.env .env
-    vim .env
-    ```
-
-1. Export environment variables
-
-    ```shell
-    export $(cat .env | xargs)
     ```
 
 1. Start the server
@@ -97,22 +89,25 @@ npm run lint
 
 ## Testing
 
-Tests run using [Mocha](https://mochajs.org/) and code coverage is reported
-with [Istanbul](https://istanbul.js.org/).
+Tests run with [Mocha](https://mochajs.org/) and code coverage is reported
+with [Istanbul](https://istanbul.js.org/). Tests live under the `test/`
+directory, which is Mocha's default path.
 
-All tests live under the `test` directory which is Mocha's default path.
+To run the test suite:
 
-You can run the test suite with:
+1. Create a `.env.test` file and populate with test values (see `.travis.yml`)
 
-```shell
-npm test
-```
+    ```shell
+    cp .example.env .env.test
+    ```
 
-## Deployment
+1. Run the test script
 
-You can deploy this application to a server of your choice using Docker.
+    ```shell
+    npm test
+    ```
 
 ## Development
 
 See [Issues](https://github.com/cesarferradas/shorturls/issues) for outstanding
-work, and feel free to submit your own.
+work, and feel free to suggest features!
