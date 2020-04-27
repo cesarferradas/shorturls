@@ -1,9 +1,21 @@
 const config = module.exports
 
+config.app = {
+  domain: process.env.APP_DOMAIN,
+  name: process.env.APP_NAME,
+}
+
+config.allowedOrigins = [
+  `http://${config.app.domain}`,
+  `https://${config.app.domain}`,
+]
+
 config.env = process.env.NODE_ENV
 
 config.jwt = {
   secret: process.env.JWT_SECRET,
+  issuer: config.app.domain,
+  expires: '24h',
 }
 
 // see https://zelark.github.io/nano-id-cc/

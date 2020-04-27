@@ -44,14 +44,6 @@ describe('Base redirect', () => {
   })
 })
 
-describe('/api', () => {
-  it('returns success', (done) => {
-    request(app)
-      .get('/api')
-      .expect(200, done)
-  })
-})
-
 describe('/api/links', () => {
   it('requires authentication', (done) => {
     request(app)

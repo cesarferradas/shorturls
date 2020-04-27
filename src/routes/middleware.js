@@ -19,19 +19,24 @@ const handleError = (err, req, res, done) => {
     logger.info(`${message}: ${error}`)
   }
 
-  res.status(status).json({ status, message })
+  res.status(status).json({ message })
   done()
 }
 
 const loadUser = (req, res, next) => {
   req.user = undefined
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-    jwt.verify(req.headers.authorization.split(' ')[1], config.jwt.secret, (err, decode) => {
-      if (err || !decode) {
+  if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    const token = req.headers.authorization.split(' ')[1]
+    jwt.verify(token, config.jwt.secret, { issuer: config.jwt.issuer }, (err, decode) => {
+      if (err) {
+        next({
+          status: 401,
+          message: err.message,
+        })
+      } else {
+        req.user = decode
         next()
       }
-      req.user = decode
-      next()
     })
   } else {
     next()
@@ -45,7 +50,6 @@ const rateLimit = (req, res, next) => {
       next({
         status: 429,
         message: 'Too many requests',
-        error: err,
       })
     } else {
       next()

@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const express = require('express')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
@@ -24,10 +25,10 @@ mongoose.connect(`mongodb://${config.mongo.host}/${config.mongo.name}`, {
 }).catch((err) => logger.error(`Could not connect to MongoDB ${err}`))
 
 app.use(bodyParser.json())
+app.use(cors({ origin: config.allowedOrigins }))
 app.use(helmet())
 app.use(morgan(config.morgan.format))
 
-app.use(middleware.rateLimit)
 app.use(middleware.loadUser)
 
 app.use('/api/auth/', auth)

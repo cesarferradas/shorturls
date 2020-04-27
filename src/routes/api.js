@@ -5,13 +5,7 @@ const middleware = require('./middleware')
 
 const api = express.Router()
 
-api.route('/')
-  .get((req, res) => {
-    res.json({
-      status: 200,
-      message: 'shorturls API',
-    })
-  })
+api.use(middleware.rateLimit)
 
 api.route('/links')
   .post(middleware.requireAuth, (req, res, next) => {
@@ -20,15 +14,11 @@ api.route('/links')
     newLink.save((err, link) => {
       if (err) {
         next({
-          status: 400,
           message: 'Could not create Link',
           error: err,
         })
       } else {
-        res.json({
-          status: 200,
-          data: link,
-        })
+        res.json(link)
       }
     })
   })
