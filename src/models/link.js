@@ -8,6 +8,10 @@ const LinkSchema = new mongoose.Schema({
     type: String,
     default: () => nanoid(config.linkSize),
   },
+  count: {
+    type: Number,
+    default: 0,
+  },
   url: {
     type: String,
     required: true,
@@ -21,6 +25,7 @@ const LinkSchema = new mongoose.Schema({
 LinkSchema.options.toJSON = {
   transform: (doc, ret) => ({
     code: ret._id,
+    count: ret.count,
     url: ret.url,
     created_at: ret.createdAt,
     updated_at: ret.updatedAt,

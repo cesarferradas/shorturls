@@ -5,15 +5,20 @@ const Link = require('../models/link')
 const base = express.Router()
 
 base.route('/')
-  .get((req, res) => { res.send('Oops, there\'s nothing here') })
+  .get((req, res) => {
+    // TODO render React homepage
+    res.send('shorturls')
+  })
 
 base.route('/:linkId')
   .get((req, res) => {
     Link.findById(req.params.linkId, (err, link) => {
-      // TODO redirect to somewhere more meaningful
       if (err || !link) {
-        res.status(404).send('Not found')
+        // TODO render error page
+        res.send('Not found')
       } else {
+        link.count += 1
+        link.save()
         res.redirect(link.url)
       }
     })
