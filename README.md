@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cesarferradas/shorturls.svg?branch=master)](https://travis-ci.org/cesarferradas/shorturls)
+[![Build Status](https://travis-ci.org/cesarenv/shorturls.svg?branch=master)](https://travis-ci.org/cesarenv/shorturls)
 
 # shorturls
 
